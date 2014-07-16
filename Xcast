@@ -166,7 +166,7 @@ def video_options
 end
 
 def misc_options
-  %W[-sameq -threads #{$thread_count} -strict experimental]
+  %W[-threads #{$thread_count} -strict experimental]
 end
 
 def output_options
@@ -201,7 +201,7 @@ unless $full
     # resize by certain multiples. For instance, Emacs will only
     # resize in multiples of the current character size. So now that
     # the window has resized to approximately the desired size. we
-    # need to find out it's *exact* size.
+    # need to find out its *exact* size.
     info_results, info_status =
       Open3.capture2e("xwininfo", *%W[-id #{win_id}])
     win_stats = info_results.each_line.each_with_object({}) do
