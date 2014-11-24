@@ -166,7 +166,7 @@ def video_options
 end
 
 def misc_options
-  %W[-sameq -threads #{$thread_count} -strict experimental]
+  %W[-threads #{$thread_count} -strict experimental]
 end
 
 def output_options
