@@ -27,6 +27,7 @@ $format           = "x11grab"
 $video_codec      = "mpeg4"
 $video_preset     = "lossless_ultrafast"
 $audio_codec      = "pcm_s16le"
+$thread_queue_size = 32
 pick              = false
 delay_seconds     = 0
 show              = false
@@ -145,7 +146,7 @@ def geometry_options
 end
 
 def recording_options
-  %W[-f #{$format}] + geometry_options + %W[-i #{video_input} -r #{$fps}]
+  %W[-f #{$format}] + geometry_options + %W[-thread_queue_size #{$thread_queue_size} -i #{video_input} -r #{$fps}]
 end
 
 def acodec_options
@@ -166,11 +167,11 @@ def video_options
 end
 
 def misc_options
-  %W[-threads #{$thread_count} -strict experimental]
+  %W[-threads #{$thread_count} -strict experimental -loglevel error]
 end
 
 def output_options
-  [filename.to_s]
+  %W[#{filename}]
 end
 
 def ffmpeg_flags
