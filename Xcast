@@ -159,7 +159,7 @@ def vcodec_options
 end
 
 def audio_options
-  acodec_options + %W[-f alsa -i #{$audio_input}]
+  acodec_options + %W[-f alsa -i #{$audio_input} -ac 2]
 end
 
 def video_options
