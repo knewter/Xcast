@@ -23,11 +23,13 @@ $height           = 540
 $x                = 950
 $y                = 50
 $audio_input      = "pulse"
+#$audio_input      = "alsa_input.usb-Focusrite_Scarlett_2i2_USB-00.analog-stereo"
+#$audio_input      = "combined.monitor"
 $format           = "x11grab"
 $video_codec      = "mpeg4"
 $video_preset     = "lossless_ultrafast"
 $audio_codec      = "pcm_s16le"
-$thread_queue_size = 32
+$thread_queue_size = 512
 pick              = false
 delay_seconds     = 0
 show              = false
@@ -159,7 +161,8 @@ def vcodec_options
 end
 
 def audio_options
-  acodec_options + %W[-f alsa -i #{$audio_input}]
+  acodec_options + %W[-f alsa -thread_queue_size #{$thread_queue_size} -i #{$audio_input}]
+  #acodec_options + %W[-f pulse -i #{$audio_input}]
 end
 
 def video_options
@@ -167,7 +170,8 @@ def video_options
 end
 
 def misc_options
-  %W[-threads #{$thread_count} -strict experimental -loglevel error]
+  #%W[-threads #{$thread_count} -strict experimental -loglevel error]
+  %W[-threads #{$thread_count} -strict experimental]
 end
 
 def output_options
